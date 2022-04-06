@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const View = styled.View`
 	flex: 1;
-	padding: 0 50px;
+	padding: 0 30px;
 	padding-top: 100px;
 	background-color: ${colors.bgColor};
 `;
