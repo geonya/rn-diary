@@ -24,8 +24,11 @@ const Btn = styled.TouchableOpacity`
 	justify-content: center;
 	align-items: center;
 	background-color: ${colors.btnColor};
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); // if android use elevation
+	elevation: 5;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 `;
+// if android make shadow with elevation
+
 const BtnText = styled.Text`
 	color: white;
 `;
