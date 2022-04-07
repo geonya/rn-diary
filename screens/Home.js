@@ -59,10 +59,11 @@ const Home = ({ navigation: { navigate } }) => {
 	const [feelings, setFeelings] = useState([]);
 	useEffect(() => {
 		const feelings = realm.objects("Feeling");
-		feelings.addListener((feelings, changes) => {
+		feelings.addListener((feelings) => {
+			// feelings 에 변화를 감지하여 작동함
 			LayoutAnimation.spring(); // state에 어떤 변화가 생기든 animate 해라 -> animation 을 굉장히 쉽게 만들어줌
 			//https://reactnative.dev/docs/layoutanimation
-			// android 의 경우 따로 UIManager 코드를 실행 시켜야함
+			// android 의 경우 animation 을 위해 따로 UIManager 코드를 실행 시켜야함
 			// if (Platform.OS === 'android') {
 			// 	if (UIManager.setLayoutAnimationEnabledExperimental) {
 			// 		UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -70,13 +71,14 @@ const Home = ({ navigation: { navigate } }) => {
 			// }
 			setFeelings(feelings.sorted("_id", true)); // true/false 정렬 방법
 		});
+		// component가 모두 mount 되면 lisnter를 제거 한다.
 		return () => feelings.removeAllListeners();
 	}, []);
 	const handleDelete = (id) => {
 		realm.write(() => {
 			//realm 에서는 항상 write 안에서 add / delete / edit 을 한다
 			// id 를 이용해서 찾고 지운다.
-			const feeling = realm.objectForPrimaryKey("Feeling", id);
+			const feeling = realm.objectForPrimaryKey("Feeling", id); // get Feeling
 			//https://www.mongodb.com/docs/realm/sdk/node/examples/read-and-write-data/
 			realm.delete(feeling);
 		});

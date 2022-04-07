@@ -9,7 +9,7 @@ const FeelingSchema = {
 	name: "Feeling",
 	properties: {
 		_id: "int",
-		emotion: "string",
+		emotion: "string", // string? => not required
 		message: "string",
 	},
 	primaryKey: "_id",
@@ -36,7 +36,6 @@ export default function App() {
 			/>
 		);
 	}
-	// context 박스로 감싸면 value 를 해당 컴포넌트들에서 이용 가능하다
 	return (
 		<DBContext.Provider value={realm}>
 			<NavigationContainer>
