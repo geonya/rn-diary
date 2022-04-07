@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import colors from "../colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useDB } from "../context";
-import { FlatList } from "react-native";
+import { FlatList, LayoutAnimation } from "react-native";
 import { TouchableOpacity } from "react-native";
 
 const View = styled.View`
@@ -60,6 +60,14 @@ const Home = ({ navigation: { navigate } }) => {
 	useEffect(() => {
 		const feelings = realm.objects("Feeling");
 		feelings.addListener((feelings, changes) => {
+			LayoutAnimation.spring(); // state에 어떤 변화가 생기든 animate 해라 -> animation 을 굉장히 쉽게 만들어줌
+			//https://reactnative.dev/docs/layoutanimation
+			// android 의 경우 따로 UIManager 코드를 실행 시켜야함
+			// if (Platform.OS === 'android') {
+			// 	if (UIManager.setLayoutAnimationEnabledExperimental) {
+			// 		UIManager.setLayoutAnimationEnabledExperimental(true);
+			// 	}
+			// }
 			setFeelings(feelings.sorted("_id", true)); // true/false 정렬 방법
 		});
 		return () => feelings.removeAllListeners();
