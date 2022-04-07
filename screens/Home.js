@@ -5,9 +5,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { useDB } from "../context";
 import { FlatList, LayoutAnimation } from "react-native";
 import { TouchableOpacity } from "react-native";
+import { AdMobBanner } from "expo-ads-admob";
 
 const View = styled.View`
 	flex: 1;
+
+	align-items: center;
 	padding: 0 30px;
 	padding-top: 100px;
 	background-color: ${colors.bgColor};
@@ -15,7 +18,8 @@ const View = styled.View`
 const Title = styled.Text`
 	color: ${colors.textColor};
 	font-size: 38px;
-	margin-bottom: 100px;
+	width: 100%;
+	margin-bottom: 50px;
 `;
 const Btn = styled.TouchableOpacity`
 	position: absolute;
@@ -31,10 +35,6 @@ const Btn = styled.TouchableOpacity`
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 `;
 // if android make shadow with elevation
-
-const BtnText = styled.Text`
-	color: white;
-`;
 
 const Record = styled.View`
 	background-color: ${colors.cardColor};
@@ -86,7 +86,13 @@ const Home = ({ navigation: { navigate } }) => {
 	return (
 		<View>
 			<Title>My journal</Title>
+			<AdMobBanner
+				style={{ backgroundColor: colors.bgColor }}
+				bannerSize="fullBanner"
+				adUnitID="ca-app-pub-3940256099942544/2934735716"
+			/>
 			<FlatList
+				style={{ marginVertical: 50, width: "100%" }}
 				data={feelings}
 				contentContainerStyle={{ paddingVertical: 10 }}
 				ItemSeparatorComponent={Separator}
