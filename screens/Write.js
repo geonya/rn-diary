@@ -59,9 +59,6 @@ const emotions = ["😎", "😭", "😳", "🤣", "🥰", "🥶", "🤨"];
 
 const Write = ({ navigation: { goBack } }) => {
 	const realm = useDB();
-	useEffect(() => {
-		console.log(realm);
-	}, []);
 	const [selectedEmotion, setEmotion] = useState(null);
 	const [feelings, setFeelings] = useState("");
 	const onChangeText = (text) => setFeelings(text);
